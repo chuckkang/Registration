@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <!--JQuery Vader Theme -->
+    </head>
+    <body>
+        <form id="form1" method="post" action="#">
+        
+        <div id="wrapper">
+            <label id="errormessage" name="errormessage"></label><Br>
+            Start Date: <input type="text" id="startdate" id="startdate"><Br>
+            End Date: <input type="text" id="enddate" id="startdate"><Br>
+
+            Name: <input type="text" id="name" id="name">
+            <input type="button" id="button" value="Submit">
+        </div>
+        </form>
+        <script>
+            $(document).ready(function(){
+            //////////////////////////////////////////////////
+                $('#startdate').datepicker();
+                $('#enddate').datepicker();
+
+                $(document).on('click', '#button', function(){
+                    var errorMessage = $('#errormessage');
+                    errorMessage.text('');
+                    var startDate = $.trim($("#startdate").datepicker({ dateFormat: 'dd,MM,yyyy' }).val());
+                    var endDate = $.trim($('#enddate').datepicker({ dateFormat: 'dd,MM,yyyy' }).val());
+                    var name = $.trim($('#name').val());
+                    var strError = "Please enter "
+                    if (startDate==''){
+                        errorMessage.text( strError + "the start date.");
+                        errorMessage.show();
+                    }
+                    else if (endDate == '') {
+                            errorMessage.text(strError + " the end date.");
+                            // con
+                            errorMessage.show();
+                        }
+                    else if (name == '') {
+                            errorMessage.text(strError + " your name.");
+                            // console.log(errorMessage.val(), "name");
+                            errorMessage.show();
+                        }
+                   else{
+                    var alertMessage = 'You have reserved '+ startDate+ '. Your checkout date is'+ endDate+ '.\n Thank you for staying with us '+ name;
+                    alert(alertMessage);
+                    console.log(startDate, endDate, name, "---");
+                    }
+                    $('#form1').submit(function(){return false;})
+                })
+            
+            //////////////////////////////////////////////////
+            })
+        </script>
+    </body>
+</html>
